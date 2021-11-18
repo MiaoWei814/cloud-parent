@@ -9,7 +9,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @program: cloud-parent
  * @description:
  * @author: MiaoWei
- * @create: 2021-11-14 14:45
+ * @create:
  **/
 @SpringBootApplication
 @EnableEurekaClient
