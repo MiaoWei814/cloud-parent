@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author: MiaoWei
  * @create: 2021-11-18 10:38
  **/
-@FeignClient(value = "SERVICE-USER")
+@FeignClient(value = "SERVICE-USER",fallbackFactory = UserClientFallback.class)
 public interface UserClient {
 
     @GetMapping("/getUserById/{id}")

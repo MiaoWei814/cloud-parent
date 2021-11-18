@@ -7,6 +7,7 @@ eureka:
   instance:
     instance-id: order:1053 #服务的实例ID(右边的)
     prefer-ip-address: true #使用IP注册到Eureaka
+    lease-renewal-interval-in-seconds: 5 # 客户端续约频率
 server:
   port: 1053
 spring:
@@ -21,4 +22,7 @@ ribbon:
   eager-load:
     enabled: true #开启饥饿加载
     clients: service-user #针对于哪些服务需要饥饿加载
+feign:
+  hystrix:
+    enabled: true #开启熔断支持
 

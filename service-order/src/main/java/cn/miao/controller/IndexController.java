@@ -2,6 +2,7 @@ package cn.miao.controller;
 
 import cn.miao.domain.User;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -28,24 +29,22 @@ public class IndexController {
     private DiscoveryClient client;
     @Autowired
     private RestTemplate restTemplate;
-    @GetMapping("/getUserById/{id}")
-    public Object getUserById(@PathVariable Long id) {
-//        // 获取微服务列表的清单
-//        List<String> services = client.getServices();
-//        System.out.println("discovery=>services:" + services);
-//        // 得到一个具体的微服务信息,通过具体的微服务id，applicaioinName；
-//        List<ServiceInstance> instances = client.getInstances("service-user");
-//        for (ServiceInstance instance : instances) {
-//            System.out.println(
-//                    instance.getHost() + "\t" + // 主机名称
-//                            instance.getPort() + "\t" + // 端口号
-//                            instance.getUri() + "\t" + // uri
-//                            instance.getServiceId() // 服务id
-//            );
-//        }
-//        return this.client;
 
+    @HystrixCommand(fallbackMethod = "fallbackMethod")   //方法熔断
+    @GetMapping("/getUserById/{id}")
+    public User getUserById(@PathVariable Long id) {
         String url = "http://SERVICE-USER/getUserById/" + id;
         return restTemplate.getForObject(url, User.class);
+    }
+
+    /**
+     * //降级方法 ， 参数和返回值必须和被熔断的方法一致 ，方法名要和  fallbackMethod 的值一致
+     *
+     * @param id id
+     * @return {@link User}
+     */
+    public User fallbackMethod(@PathVariable Long id) {
+        //返回托底数据
+        return new User(-1 ,"无此用户","用户服务不可用");
     }
 }

@@ -3,6 +3,7 @@ package cn.miao;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -18,6 +19,7 @@ import java.sql.ResultSet;
  * @create: 2021-11-14 14:45
  **/
 @SpringBootApplication
+@EnableCircuitBreaker       //开启Hystrix熔断
 //@EnableEurekaClient 可打可不打  因为导包的时候就已经注册到服务中心去了,只支持Eureka环境
 //开启服务发现客户端,可以不加
 //@EnableDiscoveryClient  可以支持其他的注册中心

@@ -7,6 +7,7 @@ eureka:
   instance:
     instance-id: order:1020 #服务的实例ID(右边的)
     prefer-ip-address: true #使用IP注册到Eureaka
+    lease-renewal-interval-in-seconds: 5 # 客户端续约频率
 server:
   port: 1020
 spring:

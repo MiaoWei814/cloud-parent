@@ -6,6 +6,7 @@ server:
 eureka: # 对Eureka的配置
   instance:
     hostname: localhost #主机
+    lease-expiration-duration-in-seconds: 15 #服务剔除时间
   client: #客户端配置
     registerWithEureka: false  #EurekaServer自己不要注册到EurekaServer自己 ，只有EurekaClient才注册
     fetchRegistry: false  #EurekaServer不要拉取服务的通信地址列表 ，只有EurekaClient才拉取地址列表

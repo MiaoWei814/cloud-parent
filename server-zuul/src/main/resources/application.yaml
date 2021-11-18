@@ -1,0 +1,22 @@
+#注册到EurekaServer
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1010/eureka/ #注册中心的注册地址
+  #使用ip地址进行注册
+  instance:
+    prefer-ip-address: true
+    #要指定服务的实例ID
+    instance-id:  server-zuul:1061
+server:
+  port: 1061
+spring:
+  application:
+    name: server-zuul  #服务名
+
+zuul:
+  prefix: "/servers"  #统一访问前缀
+  ignoredServices: "*"  #禁用掉使用浏览器通过服务名的方式访问服务
+  routes:
+    SERVICE-PAY: "/pay/**"   #指定pay-server这个服务使用 /pay路径来访问  - 别名
+    SERVICE-ORDER: "/order/**"   #指定order-server这个服务使用 /order路径来访问

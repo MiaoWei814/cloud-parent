@@ -14,8 +14,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 //开启Feign
 @EnableFeignClients(basePackages = "cn.miao.feginclient")
 public class PayApplication {
-
-
     public static void main(String[] args) {
         SpringApplication.run(PayApplication.class);
     }
