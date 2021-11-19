@@ -1,0 +1,39 @@
+##端口 ，服务名 ，主机 ，注册地址，使用IP注册，实例ID
+##Eureak的配置
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:1010/eureka/ #注册中心的注册地址
+#    registry-fetch-interval-seconds: 5 #拉取注册表的时间间隔
+#  instance:
+#    instance-id: zuul:1061 #服务的实例ID
+#    prefer-ip-address: true #使用IP注册到Eureak
+#    lease-renewal-interval-in-seconds: 5 #客户端续约频率
+#server:
+#  port: 1061
+#spring:
+#  application:
+#    name: service-zuul #服务的名字
+#zuul:
+#  prefix: "/services" #统一前缀
+#  ignored-services: "*" #禁用掉服务名访问方式
+#  routes:
+#    service-user: "/user/**"
+#    service-pay: "/pay/**"
+#    service-order: "/order/**" #访问路径： http://localhost:zuul端口/前缀/服务别名/资源路径
+#  retryable: true #是否开启重试功能
+#  ribbon:
+#    eager-load.enabled: true  	# 饥饿加载
+#ribbon:
+#  MaxAutoRetries: 1 #对当前服务的重试次数
+#  MaxAutoRetriesNextServer: 1 #切换相同Server的次数
+#  OkToRetryOnAllOperations: false # 对所有的操作请求都进行重试，
+#  ConnectTimeout: 2000 #请求连接的超时时间
+#  ReadTimeout: 3000 #请求处理的超时时间,这个时间要考虑到整个服务调用的读取时间
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 6000  # histrix的重试时间
